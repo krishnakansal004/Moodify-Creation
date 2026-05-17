@@ -1,6 +1,9 @@
 const userModel = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const redis = require("../config/cache")
+const blacklistModel = require("../models/blacklist.model")
+
 
 async function registerController(req, res) {
   const { username, email, password } = req.body;
@@ -44,7 +47,7 @@ async function loginController(req, res) {
   const { email, password, username } = req.body;
   const user = await userModel.findOne({
     $or: [{ username }, { email }],
-  });
+  }).select("+password");
   if (!user) {
     return res.status(400).json({
       message: "Invalid Credentials",
@@ -75,7 +78,31 @@ async function loginController(req, res) {
   })
 }
 
+async function getMe(req,res) {
+    const user = await userModel.findById(req.user.id)
+
+    return res.status(200).json({
+        message:"User fetched",
+        user
+    })
+}
+
+async function logoutController(req,res) {
+    const token = req.cookies.token
+
+    res.clearCookie("token")
+
+    await redis.set(token,Date.now().toString(),"EX",60*60)
+
+    return res.status(200).json({
+        message:"User logged out"
+    })
+}
+
+
 module.exports = {
   registerController,
-  loginController
+  loginController,
+  getMe,
+  logoutController
 };
