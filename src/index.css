@@ -1,0 +1,16 @@
+*{
+  margin: 0;padding: 0;box-sizing: border-box;
+}
+html,body,#root{
+  height: 100%;
+  width: 100%;
+  background-color: rgb(17, 16, 16);
+  color: rgb(220, 211, 211);
+}
+button{
+  padding: 20px 40px;
+  border: 50px;
+  border-radius: 20px;
+  background-color: rgb(40, 170, 163);
+  color: rgb(239, 232, 232);
+}
