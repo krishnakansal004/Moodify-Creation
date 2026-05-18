@@ -1,7 +1,7 @@
 const userModel = require("../models/user.model");
-const blacklistModel = require("../models/blacklist.model")
+const blacklistModel = require("../models/blacklist.model");
 const jwt = require("jsonwebtoken");
-const redis = require("../config/cache")
+const redis = require("../config/cache");
 
 async function authUser(req, res, next) {
   const token = req.cookies.token;
@@ -11,12 +11,12 @@ async function authUser(req, res, next) {
     });
   }
 
-  const isTokenBlacklisted = await redis.get(token)
+  const isTokenBlacklisted = await redis.get(token);
 
-  if(isTokenBlacklisted){
+  if (isTokenBlacklisted) {
     return res.status(401).json({
-        message:"Invalid Token"
-    })
+      message: "Invalid Token",
+    });
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -28,4 +28,4 @@ async function authUser(req, res, next) {
     });
   }
 }
-module.exports = {authUser};
+module.exports = { authUser };

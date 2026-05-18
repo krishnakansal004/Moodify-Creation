@@ -1,16 +1,138 @@
-# React + Vite
+# 🎵 Moodify – AI Mood-Based Music Player
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Moodify is an AI-powered music player that detects user facial expressions and recommends songs based on mood analysis. The application combines real-time emotion detection with a secure full-stack architecture to deliver a personalized music experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Features
 
-## React Compiler
+* 🔐 User Authentication (Login / Register)
+* 🎭 Real-time facial expression detection using MediaPipe
+* 🎵 Mood-based song recommendation system
+* 📤 Song upload and retrieval functionality
+* 🖼️ Image and media handling with ImageKit
+* ⚡ Secure session handling with Redis token management
+* 🚫 Token blacklisting for improved authentication security
+* 🌐 RESTful APIs with modular backend architecture
+* 📱 Responsive user interface
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+
+* React.js
+* Tailwind CSS
+* Vite
+
+### Backend
+
+* Node.js
+* Express.js
+
+### Database
+
+* MongoDB
+* Redis
+
+### AI / Media
+
+* MediaPipe
+* ImageKit
+
+### Tools
+
+* Git
+* GitHub
+* Postman
+
+---
+
+## 📂 Project Structure
+
+Backend follows a modular architecture:
+
+```bash
+├── config
+├── controllers
+├── middleware
+├── models
+├── routes
+├── services
+├── validators
+├── app.js
+```
+
+Frontend structure:
+
+```bash
+├── app
+├── features
+├── main.jsx
+```
+
+---
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/krishnakansal004/Moodify.git
+```
+
+Move into project directory:
+
+```bash
+cd Moodify
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create environment variables:
+
+```env
+PORT=
+MONGO_URI=
+JWT_SECRET=
+REDIS_URL=
+IMAGEKIT_PUBLIC_KEY=
+IMAGEKIT_PRIVATE_KEY=
+IMAGEKIT_URL_ENDPOINT=
+```
+
+Run project:
+
+```bash
+npm run dev
+```
+
+---
+
+## 💡 Future Improvements
+
+* Spotify API integration
+* Playlist generation based on detected mood
+* Real-time music streaming
+* User listening history
+* Favorite songs and playlists
+* Recommendation optimization
+
+---
+
+## 👨‍💻 Author
+
+Krishna Kansal
+
+GitHub: https://github.com/krishnakansal004
+
+LinkedIn: https://linkedin.com/in/krishna-kansal
+
+---
+
+If you found this project interesting, consider giving it a ⭐
