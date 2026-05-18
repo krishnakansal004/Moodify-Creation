@@ -111,14 +111,18 @@ export const detectExpressions = async ({
       jawOpen > 0.3
     ) {
       setExpression("😲 Surprised");
-    } else if (jawOpen > 0.5) {
-      setExpression("😮 Mouth Open");
-    } else if (
-      eyeBlinkLeft > 0.7 ||
-      eyeBlinkRight > 0.7
-    ) {
-      setExpression("😉 Blinking");
-    } else if (
+    } 
+    // else if (jawOpen > 0.5) {
+    //   setExpression("😮 Mouth Open");
+    // } 
+    // else if (
+    //   eyeBlinkLeft > 0.7 ||
+    //   eyeBlinkRight > 0.7
+    // ) 
+    // {
+    //   setExpression("😉 Blinking");
+    // } 
+    else if (
       frownLeft > 0.5 &&
       frownRight > 0.5
     ) {
