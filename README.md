@@ -122,6 +122,7 @@ npm run dev
 * User listening history
 * Favorite songs and playlists
 * Recommendation optimization
+* Use AI assistance for UI refinement and styling suggestions while keeping the project logic and implementation manual.
 
 ---
 

@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
+import "../style/FaceExpression.scss";
 
 import {
   createFaceLandmarker,
   detectExpressions,
 } from "../utils/utils";
 
-export default function FaceExpressionDetector() {
+export default function FaceExpressionDetector({ onClick = () => {} }) {
   const videoRef = useRef(null);
   const faceLandmarker = useRef(null);
 
-  const [expression, setExpression] =
-    useState("Detecting...");
+  const [expression, setExpression] = useState("Detecting...");
 
   useEffect(() => {
     createFaceLandmarker({
@@ -20,52 +20,43 @@ export default function FaceExpressionDetector() {
 
     return () => {
       if (videoRef.current?.srcObject) {
-        const tracks =
-          videoRef.current.srcObject.getTracks();
-
+        const tracks = videoRef.current.srcObject.getTracks();
         tracks.forEach((track) => track.stop());
       }
     };
   }, []);
 
+  async function handleClick() {
+    const detectedExpression = await detectExpressions({
+      faceLandmarker,
+      videoRef,
+      setExpression,
+    });
+
+    onClick(detectedExpression);
+  }
+
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "20px",
-        marginTop: "30px",
-      }}
-    >
-      <h1>Face Expression Detector</h1>
+    <div className="face-detector glass-card">
+      <h1 className="face-detector__heading">Face Expression Detector</h1>
 
       <video
         ref={videoRef}
         autoPlay
         playsInline
         muted
-        width="500"
-        height="400"
-        style={{
-          borderRadius: "10px",
-          border: "3px solid black",
-        }}
+        className="face-detector__video"
       />
 
-      <h2>{expression}</h2>
+      <h2 className={`face-detector__expression mood-${expression}`}>
+        {expression}
+      </h2>
 
-      <button
-        onClick={() =>
-          detectExpressions({
-            faceLandmarker,
-            videoRef,
-            setExpression,
-          })
-        }
-      >
-        Detect Expression
-      </button>
+      <div className="face-detector__actions">
+        <button className="button" onClick={handleClick}>
+          Detect Expression
+        </button>
+      </div>
     </div>
   );
 }

@@ -48,24 +48,21 @@ export const detectExpressions = async ({
   videoRef,
   setExpression,
 }) => {
-  if (
-    !videoRef.current ||
-    !faceLandmarker.current
-  )
-    return;
+  if (!videoRef.current || !faceLandmarker.current) return;
 
-  const results =
-    faceLandmarker.current.detectForVideo(
-      videoRef.current,
-      performance.now()
-    );
+  // Make sure video is ready
+  if (videoRef.current.readyState < 2) return;
+
+  const results = faceLandmarker.current.detectForVideo(
+    videoRef.current,
+    performance.now()
+  );
 
   if (
     results.faceBlendshapes &&
     results.faceBlendshapes.length > 0
   ) {
-    const blendshapes =
-      results.faceBlendshapes[0].categories;
+    const blendshapes = results.faceBlendshapes[0].categories;
 
     const getScore = (name) => {
       const item = blendshapes.find(
@@ -75,60 +72,26 @@ export const detectExpressions = async ({
       return item ? item.score : 0;
     };
 
-    // Expression Scores
-    const smileLeft =
-      getScore("mouthSmileLeft");
+    const smileLeft = getScore("mouthSmileLeft");
+    const smileRight = getScore("mouthSmileRight");
 
-    const smileRight =
-      getScore("mouthSmileRight");
+    const browUp = getScore("browInnerUp");
+    const jawOpen = getScore("jawOpen");
 
-    const browUp =
-      getScore("browInnerUp");
+    const frownLeft = getScore("mouthFrownLeft");
+    const frownRight = getScore("mouthFrownRight");
 
-    const jawOpen =
-      getScore("jawOpen");
+    let detectedExpression = "Neutral";
 
-    const frownLeft =
-      getScore("mouthFrownLeft");
-
-    const frownRight =
-      getScore("mouthFrownRight");
-
-    const eyeBlinkLeft =
-      getScore("eyeBlinkLeft");
-
-    const eyeBlinkRight =
-      getScore("eyeBlinkRight");
-
-    // Detect Expressions
-    if (
-      smileLeft > 0.5 ||
-      smileRight > 0.5
-    ) {
-      setExpression("😊 Smiling");
-    } else if (
-      browUp > 0.2 &&
-      jawOpen > 0.3
-    ) {
-      setExpression("😲 Surprised");
-    } 
-    // else if (jawOpen > 0.5) {
-    //   setExpression("😮 Mouth Open");
-    // } 
-    // else if (
-    //   eyeBlinkLeft > 0.7 ||
-    //   eyeBlinkRight > 0.7
-    // ) 
-    // {
-    //   setExpression("😉 Blinking");
-    // } 
-    else if (
-      frownLeft > 0.5 &&
-      frownRight > 0.5
-    ) {
-      setExpression("😔 Sad");
-    } else {
-      setExpression("😐 Neutral");
+    if (smileLeft > 0.5 || smileRight > 0.5) {
+      detectedExpression = "happy";
+    } else if (browUp > 0.2 && jawOpen > 0.3) {
+      detectedExpression = "surprised";
+    } else if (frownLeft > 0.5 && frownRight > 0.5) {
+      detectedExpression = "sad";
     }
+
+    setExpression(detectedExpression);
+    return detectedExpression;
   }
 };

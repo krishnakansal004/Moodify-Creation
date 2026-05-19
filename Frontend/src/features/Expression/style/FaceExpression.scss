@@ -1,0 +1,72 @@
+.face-detector {
+  width: 100%;
+  max-width: 820px;
+  padding: 34px;
+  border-radius: 32px;
+  background: rgba(12, 18, 34, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(22px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.face-detector__heading {
+  margin: 0;
+  font-size: clamp(2rem, 2.2vw, 2.5rem);
+  letter-spacing: -0.04em;
+  color: #f8fbff;
+}
+
+.face-detector__video {
+  width: 100%;
+  max-width: 100%;
+  min-height: 340px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 28px 60px rgba(2, 8, 24, 0.42);
+  object-fit: cover;
+  background: #05080f;
+}
+
+.face-detector__expression {
+  margin: 0;
+  color: #eef2ff;
+  font-size: clamp(1.4rem, 1.6vw, 1.9rem);
+  text-align: center;
+  font-weight: 700;
+}
+
+.mood-happy {
+  color: #ffd166;
+}
+
+.mood-sad {
+  color: #66b2ff;
+}
+
+.mood-surprised {
+  color: #c084fc;
+}
+
+.face-detector__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.face-detector__footer {
+  color: #adbac7;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .face-detector {
+    padding: 24px;
+  }
+
+  .face-detector__video {
+    min-height: 260px;
+  }
+}

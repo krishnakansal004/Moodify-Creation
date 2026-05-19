@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../style/register.scss";
 import FormGroup from "../components/FormGroup";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router";
 
@@ -29,7 +29,7 @@ const Register = () => {
             onChange={(e) => {
               setUsername(e.target.value);
             }}
-            label="username"
+            label="Username"
             placeholder="Enter username"
           />
           <FormGroup
@@ -37,7 +37,7 @@ const Register = () => {
             onChange={(e) => {
               setEmail(e.target.value);
             }}
-            label="email"
+            label="Email"
             placeholder="Enter email"
           />
           <FormGroup
@@ -45,7 +45,7 @@ const Register = () => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
-            label="password"
+            label="Password"
             placeholder="Enter password"
           />
           <button className="button">Register</button>

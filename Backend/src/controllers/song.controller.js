@@ -13,12 +13,12 @@ async function uploadSong(req, res) {
     storageService.uploadFile({
       buffer: songBuffer,
       filename: tags.title + ".mp3",
-      folder: "/cohort-2/moodify/songs",
+      folder: "/moodify/songs",
     }),
     storageService.uploadFile({
       buffer: tags.image.imageBuffer,
       filename: tags.title + ".jpeg",
-      folder: "/cohort-2/moodify/posters",
+      folder: "/moodify/posters",
     }),
   ]);
 
@@ -34,16 +34,16 @@ async function uploadSong(req, res) {
   });
 }
 
-async function getSong(req,res) {
-    const {mood }= req.query
+async function getSong(req, res) {
+  const { mood } = req.query;
 
-    const song = await songModel.findOne({
-        mood
-    })
-    res.status(200).json({
-        message:"Song fetched successfully",
-        song
-    })
+  const song = await songModel.findOne({
+    mood,
+  });
+  res.status(200).json({
+    message: "Song fetched successfully",
+    song,
+  });
 }
 
-module.exports = { uploadSong,getSong };
+module.exports = { uploadSong, getSong };

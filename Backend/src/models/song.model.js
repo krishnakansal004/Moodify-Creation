@@ -16,7 +16,7 @@ const songSchema = new mongoose.Schema({
   mood:{
     type:String,
     enum:{
-        values:["smiling","surprised","sad","neutral"],
+        values:["happy","surprised","sad","neutral"],
         message:"Enum this is"
     }
   }
